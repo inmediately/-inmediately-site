@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>InMediately.ai · Video pubblicitari creati con l'AI</title>
-<meta name="description" content="InMediately.ai è un'agenzia che produce video pubblicitari con l'intelligenza artificiale. Spot social, video prodotto e animazioni in pochi giorni.">
+<title>InMediately.ai · Scopri un nuovo modo di fare pubblicità</title>
+<meta name="description" content="Creiamo gratis il video pubblicitario della tua azienda con l'intelligenza artificiale. Tu investi solo nella sponsorizzazione sui nostri canali.">
 <meta name="theme-color" content="#0E0F1A">
-<meta property="og:title" content="InMediately.ai · Video pubblicitari creati con l'AI">
-<meta property="og:description" content="Spot social, video prodotto e animazioni in pochi giorni. Scrivici su WhatsApp.">
+<meta property="og:title" content="InMediately.ai · Scopri un nuovo modo di fare pubblicità">
+<meta property="og:description" content="Il video della tua azienda lo creiamo gratis. Tu paghi solo la visibilità.">
 <meta property="og:url" content="https://inmediately.ai/">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E0F1A'/%3E%3Crect x='12' y='16' width='8' height='32' rx='2' fill='%23F6F5F1'/%3E%3Cpath d='M27 18 L52 32 L27 46 Z' fill='%23FF5A2E' stroke='%23FF5A2E' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -21,6 +21,7 @@
     --accent: #FF5A2E;
     --muted: #B9BAC4;
     --line: #2A2B38;
+    --card: #161724;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -44,7 +45,7 @@
     padding: calc(40px + env(safe-area-inset-top)) 20px 32px;
     display: flex;
     flex-direction: column;
-    gap: 36px;
+    gap: 40px;
   }
   .logo { display: flex; align-items: center; gap: 12px; }
   .logo svg { width: 44px; height: 44px; flex: none; }
@@ -58,25 +59,62 @@
   .wordmark .m { color: var(--accent); }
   .wordmark .ai { color: #A3A4AE; font-weight: 700; }
 
-  h1 {
+  .eyebrow {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1, h2 {
     font-family: 'Sora', system-ui, sans-serif;
     font-weight: 800;
-    font-size: clamp(36px, 10vw, 52px);
-    line-height: 1.05;
     letter-spacing: -0.035em;
     margin: 0;
   }
+  h1 { font-size: clamp(36px, 10vw, 52px); line-height: 1.05; }
   h1 .hl { color: var(--accent); }
-  .lead { margin: 14px 0 0; color: var(--muted); font-size: 18px; }
+  h2 { font-size: 28px; line-height: 1.15; }
+  .lead { margin: 16px 0 0; color: var(--muted); font-size: 18px; }
+  .lead strong { color: var(--paper); font-weight: 700; }
 
-  .services { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .services li {
+  .pills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pills li {
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 8px 14px;
     font-size: 15px;
-    color: var(--paper);
   }
+
+  .steps { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .steps li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .num {
+    flex: none;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Sora', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    background: var(--accent);
+    color: var(--ink);
+  }
+  .steps h3 { margin: 4px 0 4px; font-size: 18px; font-weight: 700; }
+  .steps p { margin: 0; color: var(--muted); font-size: 16px; }
+
+  .why { margin: 20px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .why div { border-top: 3px solid var(--accent); padding-top: 12px; }
+  .why b { display: block; font-family: 'Sora', system-ui, sans-serif; font-size: 20px; letter-spacing: -0.02em; }
+  .why span { color: var(--muted); font-size: 15px; }
 
   .cta { display: flex; flex-direction: column; gap: 12px; }
   .btn {
@@ -90,6 +128,7 @@
     font-weight: 700;
     font-size: 18px;
     text-decoration: none;
+    text-align: center;
     transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
   }
   .btn:active { transform: scale(0.98); }
@@ -121,9 +160,10 @@
     font-size: 13px;
     color: #8E8F99;
   }
+  footer p { margin: 0 0 6px; }
 
   @media (min-width: 768px) {
-    main { padding-top: 96px; gap: 44px; }
+    main { padding-top: 96px; gap: 48px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .btn { transition: none; }
@@ -141,27 +181,42 @@
   </header>
 
   <section>
-    <h1>Video pubblicitari creati con l'<span class="hl">AI</span>.</h1>
-    <p class="lead">Spot per i social, video prodotto e animazioni per la tua azienda. Pronti in pochi giorni, a costi accessibili.</p>
+    <p class="eyebrow">Per PMI e aziende B2B</p>
+    <h1>Scopri un nuovo modo di fare <span class="hl">pubblicità</span>.</h1>
+    <p class="lead">Il video della tua azienda lo creiamo noi, <strong>gratis</strong>, con l'intelligenza artificiale. Tu investi solo nella sponsorizzazione sui nostri canali.</p>
   </section>
 
-  <ul class="services" aria-label="Servizi">
-    <li>Reel e TikTok</li>
-    <li>Video prodotto</li>
-    <li>Logo animati</li>
-    <li>Più lingue</li>
-  </ul>
-
   <div class="cta">
-    <a class="btn btn-primary" href="https://wa.me/393534907105?text=Ciao%20InMediately%2C%20vorrei%20informazioni%20per%20un%20video%20pubblicitario." target="_blank" rel="noopener">
+    <a class="btn btn-primary" href="https://wa.me/393534907105?text=Ciao%20InMediately%2C%20vorrei%20il%20video%20gratuito%20per%20la%20mia%20azienda." target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
-      Scrivici su WhatsApp
+      Richiedi il tuo video gratuito
     </a>
-    <p class="note">Rispondiamo direttamente, senza moduli da compilare.</p>
+    <p class="note">Scrivici su WhatsApp: ti rispondiamo di persona.</p>
   </div>
 
+  <section aria-labelledby="come">
+    <p class="eyebrow">Come funziona</p>
+    <h2 id="come">Tre passaggi, zero costi di produzione</h2>
+    <ol class="steps">
+      <li><span class="num">1</span><div><h3>Ci racconti la tua azienda</h3><p>Prodotti, servizi, clienti ideali. Bastano due righe su WhatsApp.</p></div></li>
+      <li><span class="num">2</span><div><h3>Creiamo il video, gratis</h3><p>Idea, testi e produzione con l'AI. Lo approvi prima che esca.</p></div></li>
+      <li><span class="num">3</span><div><h3>Lo spingiamo sui nostri canali</h3><p>Pubblichiamo e sponsorizziamo il video su Instagram e TikTok. Paghi solo la visibilità che scegli.</p></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="perche">
+    <p class="eyebrow">Perché conviene</p>
+    <h2 id="perche">Investi in visibilità, non in produzione</h2>
+    <div class="why">
+      <div><b>0 €</b><span>per creare il video</span></div>
+      <div><b>Budget tuo</b><span>decidi tu quanto sponsorizzare</span></div>
+      <div><b>Pochi giorni</b><span>dal primo messaggio al video online</span></div>
+      <div><b>Su misura</b><span>pensato per chi vende ad altre aziende</span></div>
+    </div>
+  </section>
+
   <nav aria-label="Social">
-    <p class="social-title">Seguici</p>
+    <p class="social-title">Guarda i nostri video</p>
     <div class="social">
       <a class="btn btn-ghost" href="https://www.instagram.com/inmediately.ai/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -173,10 +228,18 @@
       </a>
     </div>
   </nav>
+
+  <div class="cta">
+    <a class="btn btn-primary" href="https://wa.me/393534907105?text=Ciao%20InMediately%2C%20vorrei%20il%20video%20gratuito%20per%20la%20mia%20azienda." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+      Voglio il mio video gratis
+    </a>
+  </div>
 </main>
 
 <footer>
-  © 2026 InMediately.ai · Video pubblicitari con l'intelligenza artificiale
+  <p>© 2026 InMediately.ai · Video pubblicitari con l'intelligenza artificiale</p>
+  <p>I contenuti sponsorizzati sono sempre indicati come pubblicità.</p>
 </footer>
 </body>
 </html>
