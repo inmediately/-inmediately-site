@@ -37,17 +37,10 @@
     display: flex;
     flex-direction: column;
   }
-  main {
-    flex: 1;
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: calc(40px + env(safe-area-inset-top)) 20px 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  .logo { display: flex; align-items: center; gap: 12px; }
+
+  /* ---------- shared ---------- */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
   .logo svg { width: 44px; height: 44px; flex: none; }
   .wordmark {
     font-family: 'Sora', system-ui, sans-serif;
@@ -58,6 +51,28 @@
   }
   .wordmark .m { color: var(--accent); }
   .wordmark .ai { color: #A3A4AE; font-weight: 700; }
+
+  .lang {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px;
+    flex: none;
+  }
+  .lang button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font: 700 14px/1 'DM Sans', system-ui, sans-serif;
+    letter-spacing: 0.06em;
+    min-width: 44px;
+    min-height: 36px;
+    padding: 0 10px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
 
   .eyebrow {
     margin: 0 0 12px;
@@ -74,18 +89,59 @@
     margin: 0;
   }
   h1 { font-size: clamp(36px, 10vw, 52px); line-height: 1.05; }
-  h1 .hl { color: var(--accent); }
+  .hl { color: var(--accent); }
   h2 { font-size: 28px; line-height: 1.15; }
   .lead { margin: 16px 0 0; color: var(--muted); font-size: 18px; }
   .lead strong { color: var(--paper); font-weight: 700; }
 
-  .pills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .pills li {
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 8px 14px;
-    font-size: 15px;
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 60px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
   }
+  .btn:active { transform: scale(0.98); }
+  .btn svg { width: 24px; height: 24px; flex: none; }
+  .btn-primary { background: var(--accent); color: var(--ink); }
+  .btn-primary:hover { background: #FF7550; }
+  .btn-ghost { border: 1.5px solid var(--line); color: var(--paper); font-size: 16px; }
+  .btn-ghost:hover { border-color: var(--paper); }
+  .note { margin: 0; text-align: center; font-size: 14px; color: var(--muted); }
+
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+
+  footer {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 20px calc(24px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: #8E8F99;
+  }
+  footer p { margin: 0 0 6px; }
+
+  /* ---------- mobile (default) ---------- */
+  .mobile {
+    flex: 1;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: calc(32px + env(safe-area-inset-top)) 20px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .pills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .cta { display: flex; flex-direction: column; gap: 12px; }
 
   .steps { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
   .steps li {
@@ -116,27 +172,6 @@
   .why b { display: block; font-family: 'Sora', system-ui, sans-serif; font-size: 20px; letter-spacing: -0.02em; }
   .why span { color: var(--muted); font-size: 15px; }
 
-  .cta { display: flex; flex-direction: column; gap: 12px; }
-  .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-height: 60px;
-    padding: 16px 20px;
-    border-radius: 16px;
-    font-weight: 700;
-    font-size: 18px;
-    text-decoration: none;
-    text-align: center;
-    transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
-  }
-  .btn:active { transform: scale(0.98); }
-  .btn svg { width: 24px; height: 24px; flex: none; }
-  .btn-primary { background: var(--accent); color: var(--ink); }
-  .btn-primary:hover { background: #FF7550; }
-  .note { margin: 0; text-align: center; font-size: 14px; color: var(--muted); }
-
   .social-title {
     margin: 0 0 12px;
     font-size: 13px;
@@ -146,100 +181,261 @@
     color: var(--muted);
   }
   .social { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .btn-ghost { border: 1.5px solid var(--line); color: var(--paper); font-size: 16px; }
-  .btn-ghost:hover { border-color: var(--paper); }
 
-  a:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+  /* ---------- desktop ---------- */
+  .desktop { display: none; }
 
-  footer {
-    max-width: 480px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px 20px calc(24px + env(safe-area-inset-bottom));
-    border-top: 1px solid var(--line);
-    font-size: 13px;
-    color: #8E8F99;
+  @media (min-width: 1024px) {
+    .mobile { display: none; }
+    .desktop {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 48px 56px;
+    }
+    .desktop .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 64px 0;
+    }
+    .desktop .eyebrow { font-size: 14px; margin-bottom: 20px; }
+    .desktop h1 { font-size: clamp(56px, 6vw, 84px); line-height: 1.02; max-width: 15ch; }
+    .desktop .lead { font-size: 21px; max-width: 34em; margin-top: 24px; }
+    .desktop .links {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+      max-width: 760px;
+    }
+    .desktop .btn { min-height: 64px; }
+    footer { max-width: 1120px; padding-left: 48px; padding-right: 48px; display: flex; justify-content: space-between; gap: 24px; }
+    footer p { margin: 0; }
   }
-  footer p { margin: 0 0 6px; }
 
-  @media (min-width: 768px) {
-    main { padding-top: 96px; gap: 48px; }
-  }
   @media (prefers-reduced-motion: reduce) {
     .btn { transition: none; }
   }
 </style>
 </head>
 <body>
-<main>
-  <header class="logo" aria-label="InMediately.ai">
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <rect x="6" y="10" width="11" height="44" rx="3" fill="#F6F5F1"/>
-      <path d="M24 12.5 L57 32 L24 51.5 Z" fill="#FF5A2E" stroke="#FF5A2E" stroke-width="5" stroke-linejoin="round"/>
-    </svg>
-    <span class="wordmark">In<span class="m">Media</span>tely<span class="ai">.ai</span></span>
-  </header>
+
+<!-- ICONS -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 2h-3.3v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V8.6a7.7 7.7 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4z"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 64 64"><rect x="6" y="10" width="11" height="44" rx="3" fill="#F6F5F1"/><path d="M24 12.5 L57 32 L24 51.5 Z" fill="#FF5A2E" stroke="#FF5A2E" stroke-width="5" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ================= MOBILE ================= -->
+<main class="mobile">
+  <div class="topbar">
+    <span class="logo" aria-label="InMediately.ai">
+      <svg aria-hidden="true"><use href="#i-logo"/></svg>
+      <span class="wordmark">In<span class="m">Media</span>tely<span class="ai">.ai</span></span>
+    </span>
+    <div class="lang" role="group" aria-label="Lingua / Language">
+      <button type="button" data-lang="it" aria-pressed="true">IT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
 
   <section>
-    <p class="eyebrow">Per PMI e aziende B2B</p>
-    <h1>Scopri un nuovo modo di fare <span class="hl">pubblicità</span>.</h1>
-    <p class="lead">Il video della tua azienda lo creiamo noi, <strong>gratis</strong>, con l'intelligenza artificiale. Tu investi solo nella sponsorizzazione sui nostri canali.</p>
+    <p class="eyebrow" data-i18n="eyebrow">Per PMI e aziende B2B</p>
+    <h1 data-i18n="h1">Scopri un nuovo modo di fare <span class="hl">pubblicità</span>.</h1>
+    <p class="lead" data-i18n="lead">Il video della tua azienda lo creiamo noi, <strong>gratis</strong>, con l'intelligenza artificiale. Tu investi solo nella sponsorizzazione sui nostri canali.</p>
   </section>
 
   <div class="cta">
-    <a class="btn btn-primary" href="https://wa.me/393534907105?text=Ciao%20InMediately%2C%20vorrei%20il%20video%20gratuito%20per%20la%20mia%20azienda." target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
-      Richiedi il tuo video gratuito
+    <a class="btn btn-primary wa" href="https://wa.me/393792466509?text=Ciao%20InMediately%2C%20vorrei%20il%20video%20gratuito%20per%20la%20mia%20azienda." target="_blank" rel="noopener">
+      <svg aria-hidden="true"><use href="#i-wa"/></svg>
+      <span data-i18n="cta1">Richiedi il tuo video gratuito</span>
     </a>
-    <p class="note">Scrivici su WhatsApp: ti rispondiamo di persona.</p>
+    <p class="note" data-i18n="note">Scrivici su WhatsApp: ti rispondiamo di persona.</p>
   </div>
 
   <section aria-labelledby="come">
-    <p class="eyebrow">Come funziona</p>
-    <h2 id="come">Tre passaggi, zero costi di produzione</h2>
+    <p class="eyebrow" data-i18n="howEyebrow">Come funziona</p>
+    <h2 id="come" data-i18n="howTitle">Tre passaggi, zero costi di produzione</h2>
     <ol class="steps">
-      <li><span class="num">1</span><div><h3>Ci racconti la tua azienda</h3><p>Prodotti, servizi, clienti ideali. Bastano due righe su WhatsApp.</p></div></li>
-      <li><span class="num">2</span><div><h3>Creiamo il video, gratis</h3><p>Idea, testi e produzione con l'AI. Lo approvi prima che esca.</p></div></li>
-      <li><span class="num">3</span><div><h3>Lo spingiamo sui nostri canali</h3><p>Pubblichiamo e sponsorizziamo il video su Instagram e TikTok. Paghi solo la visibilità che scegli.</p></div></li>
+      <li><span class="num">1</span><div><h3 data-i18n="s1t">Ci racconti la tua azienda</h3><p data-i18n="s1d">Prodotti, servizi, clienti ideali. Bastano due righe su WhatsApp.</p></div></li>
+      <li><span class="num">2</span><div><h3 data-i18n="s2t">Creiamo il video, gratis</h3><p data-i18n="s2d">Idea, testi e produzione con l'AI. Lo approvi prima che esca.</p></div></li>
+      <li><span class="num">3</span><div><h3 data-i18n="s3t">Lo spingiamo sui nostri canali</h3><p data-i18n="s3d">Pubblichiamo e sponsorizziamo il video su Instagram e TikTok. Paghi solo la visibilità che scegli.</p></div></li>
     </ol>
   </section>
 
   <section aria-labelledby="perche">
-    <p class="eyebrow">Perché conviene</p>
-    <h2 id="perche">Investi in visibilità, non in produzione</h2>
+    <p class="eyebrow" data-i18n="whyEyebrow">Perché conviene</p>
+    <h2 id="perche" data-i18n="whyTitle">Investi in visibilità, non in produzione</h2>
     <div class="why">
-      <div><b>0 €</b><span>per creare il video</span></div>
-      <div><b>Budget tuo</b><span>decidi tu quanto sponsorizzare</span></div>
-      <div><b>Pochi giorni</b><span>dal primo messaggio al video online</span></div>
-      <div><b>Su misura</b><span>pensato per chi vende ad altre aziende</span></div>
+      <div><b data-i18n="w1t">0 €</b><span data-i18n="w1d">per creare il video</span></div>
+      <div><b data-i18n="w2t">Budget tuo</b><span data-i18n="w2d">decidi tu quanto sponsorizzare</span></div>
+      <div><b data-i18n="w3t">Pochi giorni</b><span data-i18n="w3d">dal primo messaggio al video online</span></div>
+      <div><b data-i18n="w4t">Su misura</b><span data-i18n="w4d">pensato per chi vende ad altre aziende</span></div>
     </div>
   </section>
 
   <nav aria-label="Social">
-    <p class="social-title">Guarda i nostri video</p>
+    <p class="social-title" data-i18n="socialTitle">Guarda i nostri video</p>
     <div class="social">
       <a class="btn btn-ghost" href="https://www.instagram.com/inmediately.ai/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        Instagram
+        <svg aria-hidden="true"><use href="#i-ig"/></svg>Instagram
       </a>
       <a class="btn btn-ghost" href="https://www.tiktok.com/@inmediately.ai" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.3v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V8.6a7.7 7.7 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4z"/></svg>
-        TikTok
+        <svg aria-hidden="true"><use href="#i-tt"/></svg>TikTok
       </a>
     </div>
   </nav>
 
   <div class="cta">
-    <a class="btn btn-primary" href="https://wa.me/393534907105?text=Ciao%20InMediately%2C%20vorrei%20il%20video%20gratuito%20per%20la%20mia%20azienda." target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
-      Voglio il mio video gratis
+    <a class="btn btn-primary wa" href="https://wa.me/393792466509?text=Ciao%20InMediately%2C%20vorrei%20il%20video%20gratuito%20per%20la%20mia%20azienda." target="_blank" rel="noopener">
+      <svg aria-hidden="true"><use href="#i-wa"/></svg>
+      <span data-i18n="cta2">Voglio il mio video gratis</span>
     </a>
   </div>
 </main>
 
+<!-- ================= DESKTOP ================= -->
+<main class="desktop">
+  <div class="topbar">
+    <span class="logo" aria-label="InMediately.ai">
+      <svg aria-hidden="true"><use href="#i-logo"/></svg>
+      <span class="wordmark">In<span class="m">Media</span>tely<span class="ai">.ai</span></span>
+    </span>
+    <div class="lang" role="group" aria-label="Lingua / Language">
+      <button type="button" data-lang="it" aria-pressed="true">IT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <p class="eyebrow" data-i18n="eyebrow">Per PMI e aziende B2B</p>
+    <h1 data-i18n="h1">Scopri un nuovo modo di fare <span class="hl">pubblicità</span>.</h1>
+    <p class="lead" data-i18n="leadShort">Il video della tua azienda lo creiamo <strong>gratis</strong>, con l'intelligenza artificiale. Tu investi solo nella visibilità.</p>
+    <div class="links">
+      <a class="btn btn-primary wa" href="https://wa.me/393792466509?text=Ciao%20InMediately%2C%20vorrei%20il%20video%20gratuito%20per%20la%20mia%20azienda." target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp
+      </a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/inmediately.ai/" target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-ig"/></svg>Instagram
+      </a>
+      <a class="btn btn-ghost" href="https://www.tiktok.com/@inmediately.ai" target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-tt"/></svg>TikTok
+      </a>
+    </div>
+  </section>
+</main>
+
 <footer>
-  <p>© 2026 InMediately.ai · Video pubblicitari con l'intelligenza artificiale</p>
-  <p>I contenuti sponsorizzati sono sempre indicati come pubblicità.</p>
+  <p data-i18n="foot1">© 2026 InMediately.ai · Video pubblicitari con l'intelligenza artificiale</p>
+  <p data-i18n="foot2">I contenuti sponsorizzati sono sempre indicati come pubblicità.</p>
 </footer>
+
+<script>
+(function () {
+  var WA = 'https://wa.me/393792466509?text=';
+  var T = {
+    it: {
+      _title: "InMediately.ai · Scopri un nuovo modo di fare pubblicità",
+      _desc: "Creiamo gratis il video pubblicitario della tua azienda con l'intelligenza artificiale. Tu investi solo nella sponsorizzazione sui nostri canali.",
+      _wa: "Ciao InMediately, vorrei il video gratuito per la mia azienda.",
+      eyebrow: "Per PMI e aziende B2B",
+      h1: 'Scopri un nuovo modo di fare <span class="hl">pubblicità</span>.',
+      lead: "Il video della tua azienda lo creiamo noi, <strong>gratis</strong>, con l'intelligenza artificiale. Tu investi solo nella sponsorizzazione sui nostri canali.",
+      leadShort: "Il video della tua azienda lo creiamo <strong>gratis</strong>, con l'intelligenza artificiale. Tu investi solo nella visibilità.",
+      cta1: "Richiedi il tuo video gratuito",
+      note: "Scrivici su WhatsApp: ti rispondiamo di persona.",
+      howEyebrow: "Come funziona",
+      howTitle: "Tre passaggi, zero costi di produzione",
+      s1t: "Ci racconti la tua azienda",
+      s1d: "Prodotti, servizi, clienti ideali. Bastano due righe su WhatsApp.",
+      s2t: "Creiamo il video, gratis",
+      s2d: "Idea, testi e produzione con l'AI. Lo approvi prima che esca.",
+      s3t: "Lo spingiamo sui nostri canali",
+      s3d: "Pubblichiamo e sponsorizziamo il video su Instagram e TikTok. Paghi solo la visibilità che scegli.",
+      whyEyebrow: "Perché conviene",
+      whyTitle: "Investi in visibilità, non in produzione",
+      w1t: "0 €", w1d: "per creare il video",
+      w2t: "Budget tuo", w2d: "decidi tu quanto sponsorizzare",
+      w3t: "Pochi giorni", w3d: "dal primo messaggio al video online",
+      w4t: "Su misura", w4d: "pensato per chi vende ad altre aziende",
+      socialTitle: "Guarda i nostri video",
+      cta2: "Voglio il mio video gratis",
+      foot1: "© 2026 InMediately.ai · Video pubblicitari con l'intelligenza artificiale",
+      foot2: "I contenuti sponsorizzati sono sempre indicati come pubblicità."
+    },
+    en: {
+      _title: "InMediately.ai · Discover a new way to advertise",
+      _desc: "We create your company's advertising video for free with artificial intelligence. You only invest in promoting it on our channels.",
+      _wa: "Hi InMediately, I'd like the free video for my company.",
+      eyebrow: "For SMEs and B2B companies",
+      h1: 'Discover a new way to <span class="hl">advertise</span>.',
+      lead: "We create your company's video <strong>for free</strong>, with artificial intelligence. You only invest in promoting it on our channels.",
+      leadShort: "We create your company's video <strong>for free</strong>, with artificial intelligence. You only invest in reach.",
+      cta1: "Get your free video",
+      note: "Message us on WhatsApp: a real person will reply.",
+      howEyebrow: "How it works",
+      howTitle: "Three steps, zero production costs",
+      s1t: "Tell us about your company",
+      s1d: "Products, services, ideal customers. A couple of lines on WhatsApp is enough.",
+      s2t: "We create the video, for free",
+      s2d: "Concept, copy and AI production. You approve it before it goes live.",
+      s3t: "We boost it on our channels",
+      s3d: "We publish and promote the video on Instagram and TikTok. You only pay for the reach you choose.",
+      whyEyebrow: "Why it pays off",
+      whyTitle: "Invest in reach, not production",
+      w1t: "€0", w1d: "to create the video",
+      w2t: "Your budget", w2d: "you decide how much to promote",
+      w3t: "A few days", w3d: "from first message to video online",
+      w4t: "Tailor-made", w4d: "built for companies that sell to other businesses",
+      socialTitle: "Watch our videos",
+      cta2: "I want my free video",
+      foot1: "© 2026 InMediately.ai · Advertising videos made with artificial intelligence",
+      foot2: "Sponsored content is always labelled as advertising."
+    }
+  };
+
+  function apply(lang) {
+    var t = T[lang] || T.it;
+    document.documentElement.lang = lang;
+    document.title = t._title;
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', t._desc);
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (t[k] != null) el.innerHTML = t[k];
+    });
+    document.querySelectorAll('a.wa').forEach(function (a) {
+      a.href = WA + encodeURIComponent(t._wa);
+    });
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem('inm-lang'); } catch (e) {}
+  var browser = ((navigator.languages && navigator.languages[0]) || navigator.language || 'it').toLowerCase();
+  var initial = saved || (browser.indexOf('it') === 0 ? 'it' : 'en');
+  apply(initial);
+
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var l = b.getAttribute('data-lang');
+      apply(l);
+      try { localStorage.setItem('inm-lang', l); } catch (e) {}
+    });
+  });
+})();
+</script>
 </body>
 </html>
